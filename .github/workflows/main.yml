@@ -2,7 +2,8 @@ name: Get Feed
 
 on:
   schedule:
-    - cron: '45 0 * * *'  # 8 AM CET (7 AM UTC)
+    - cron: '0 8 * * *'  # 8 AM UTC (8 AM UK time in winter, 9 AM in summer)
+    - cron: '0 17 * * *' # 5 PM UTC (5 PM UK time in winter, 6 PM in summer)
   workflow_dispatch:
 
 jobs:
@@ -12,7 +13,7 @@ jobs:
       NOTION_API_TOKEN: ${{ secrets.NOTION_API_TOKEN }}
       NOTION_READER_DATABASE_ID: ${{ secrets.NOTION_READER_DATABASE_ID }}
       NOTION_FEEDS_DATABASE_ID: ${{ secrets.NOTION_FEEDS_DATABASE_ID }}
-      RUN_FREQUENCY: 86400 # in seconds
+      RUN_FREQUENCY: 43200 # Adjusted for twice daily runs
     steps:
       - name: Setup Node
         uses: actions/setup-node@v2
